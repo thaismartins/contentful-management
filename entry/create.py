@@ -1,10 +1,12 @@
+import os
 import contentful_management
 
 def create_entry(attributes):
-  client = contentful_management.Client('')
+  token = os.getenv('CONTENTFUL_MANAGEMENT_TOKEN')
+  space = os.getenv('CONTENTFUL_SPACE')
+  environment = os.getenv('CONTENTFUL_ENVIRONMENT')
 
-  space = '46aggqlli43a'
-  environment = 'master'
+  client = contentful_management.Client(token)
 
   return client.entries(space, environment).create(
     None,

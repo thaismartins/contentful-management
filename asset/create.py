@@ -1,10 +1,12 @@
+import os
 import contentful_management
 
 def create_asset(attributes):
-  client = contentful_management.Client('CFPAT-63UXLAFIfBrTo5oHcrTHNdYe8YIV7ErSeGP4gxemnOU')
+  token = os.getenv('CONTENTFUL_MANAGEMENT_TOKEN')
+  space = os.getenv('CONTENTFUL_SPACE')
+  environment = os.getenv('CONTENTFUL_ENVIRONMENT')
 
-  space = '46aggqlli43a'
-  environment = 'master'
+  client = contentful_management.Client(token)
 
   return client.assets(space, environment).create(
     None,
