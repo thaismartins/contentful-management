@@ -4,6 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+python-dotenv = "*"
+contentful-management = "*"
+pyramda = "*"
 
 [dev-packages]
 
