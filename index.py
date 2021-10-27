@@ -5,6 +5,7 @@ import csv
 
 from brand.create import create_or_update_brand
 from model.create import create_or_update_model
+from year.create import create_or_update_year
 
 def create_contents():
   with open('/Users/thaismartins/Desktop/carros.csv', 'r') as csvfile:
@@ -16,7 +17,9 @@ def create_contents():
 
       model = generate_model(row)
       new_model = create_or_update_model(model, new_brand)
-      # year = generate_year(row)
+
+      year = generate_year(row)
+      new_year = create_or_update_year(year, new_model)
 
 def generate_brand(data):
   return {
@@ -46,10 +49,11 @@ def generate_year(data):
   return {
     'title': data['year'],
     'description': data['year_description'],
+    'image': data['year_image'],
     'hero': {
-      'title': data['model_hero_title'],
-      'description': data['model_hero_description'],
-      'images': data['model_hero_images'].split(sep=' | '),
+      'title': data['year_hero_title'],
+      'description': data['year_hero_description'],
+      'images': data['year_hero_images'].split(sep=' | '),
     }
   }
 
