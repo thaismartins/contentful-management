@@ -5,15 +5,19 @@ class Mark():
       self.type = type
 
 class HTMLParserToRichText(HTMLParser):
-  _document = {
-    "nodeType": "document",
-    "data": {},
-    "content": []
-  }
+  _document = None
+  _current_node = None
+  _current_tag = None
 
-  _current_node = {}
-
-  _current_tag = ''
+  def __init__(self, *, convert_charrefs: bool = ...) -> None:
+    super().__init__(convert_charrefs=convert_charrefs)
+    self._document = {
+      "nodeType": "document",
+      "data": {},
+      "content": []
+    }
+    self._current_node = None
+    self._current_tag = None
 
   def new_paragraph(data):
     return {
