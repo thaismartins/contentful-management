@@ -44,7 +44,7 @@ def create_model(entry, hero, image, brand):
   }
 
   new_model = create_entry(attributes)
-
+  
   return { 'id': new_model.id }
 
 def generate_entry(id):

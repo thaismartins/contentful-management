@@ -5,7 +5,6 @@ from brand.hero.image.create import create_or_update_image
 from brand.hero.get import get_hero_by_title
 
 def create_or_update_hero(entry):
-  logging('-----')
   logging('Starting Brand | Hero creation...')
 
   if entry is None:

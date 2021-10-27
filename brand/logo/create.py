@@ -3,7 +3,6 @@ from image.create import create_image
 from logs.logging import logging
 
 def create_or_update_logo(entry):
-  logging('-----')
   logging('Starting Brand | Logo creation...')
 
   if entry is None or 'logo' not in entry:

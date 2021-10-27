@@ -6,7 +6,6 @@ from model.hero.image.create import create_or_update_images
 from rich_text.convert_html import convert_html
 
 def create_or_update_hero(entry):
-  logging('-----')
   logging('Starting Model | Hero creation...')
 
   if entry is None:
@@ -22,10 +21,14 @@ def create_or_update_hero(entry):
   return create_hero(entry, images)
 
 def update_hero(hero, images):
+  logging('Updating Model | Hero...')
+  
   # TODO: update hero
   return hero
 
 def create_hero(entry, images):
+  logging('Creating Model | Hero...')
+
   imagesEntry = []
   if images is not None:
     for image in images:
