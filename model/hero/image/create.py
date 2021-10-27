@@ -10,9 +10,10 @@ def create_or_update_images(entry):
   
   images = []
   for image in entry['images']:
-    imageEntry = dict(entry)
-    imageEntry['image'] = image
-    images.append(create_or_update_image(imageEntry))
+    if image:
+      imageEntry = dict(entry)
+      imageEntry['image'] = image
+      images.append(create_or_update_image(imageEntry))
 
   return images
 
