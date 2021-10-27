@@ -13,7 +13,7 @@ def create_or_update_hero(entry):
     return None
     
   image = create_or_update_image(entry)
-  hero = get_hero_by_title(entry)
+  hero = get_hero_by_title(entry['title'])
   if (hero):
     return update_hero(hero, image)
 
