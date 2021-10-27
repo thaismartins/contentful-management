@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 python-dotenv = "*"
 contentful-management = "*"
-pyramda = "*"
+awesome-slugify = "*"
 
 [dev-packages]
 
