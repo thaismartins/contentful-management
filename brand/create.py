@@ -1,8 +1,8 @@
+from logs.logging import logging
+from entry.create import create_entry
 from brand.get import get_brand_by_title
 from brand.hero.create import create_or_update_hero
 from brand.logo.create import create_or_update_logo
-from entry.create import create_entry
-from logs.logging import logging
 
 def generate_hero(id):
   return {
@@ -31,6 +31,10 @@ def create_or_update_brand(entry):
   logging('-----')
   logging('-----')
   logging('Starting Brand creation...')
+
+  if entry is None:
+    logging('Brand wasn`t created. No data was passed...')
+    return None
   
   brand = get_brand_by_title(entry['title'])
 
@@ -60,7 +64,9 @@ def create_brand(entry, logo, hero):
     }
   }
 
-  return create_entry(attributes)
+  new_brand = create_entry(attributes)
+
+  return { 'id': new_brand.id }
 
 def update_brand(brand, logo, hero):
   logging('Updating Brand...')

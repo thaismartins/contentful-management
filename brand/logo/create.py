@@ -21,7 +21,8 @@ def create_logo(entry):
   title = entry['title']
   description = f"{entry['title']} Description"
 
-  return create_image(title, description, entry['logo'])
+  new_logo = create_image(title, description, entry['logo'])
+  return { 'id': new_logo.id }
 
 
 def update_logo(logo):
