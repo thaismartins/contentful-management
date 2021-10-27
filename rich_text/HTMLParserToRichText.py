@@ -11,6 +11,9 @@ class HTMLParserToRichText(HTMLParser):
 
   def __init__(self, *, convert_charrefs: bool = ...) -> None:
     super().__init__(convert_charrefs=convert_charrefs)
+    self.clear_contents()
+
+  def clear_contents(self):
     self._document = {
       "nodeType": "document",
       "data": {},
@@ -45,8 +48,8 @@ class HTMLParserToRichText(HTMLParser):
       self._current_node = self.new_paragraph()
 
   def handle_endtag(self, tag):
-    self._current_tag = ''
-    if (tag == 'p'):
+    self._current_tag = None
+    if self._document['content'] and tag == 'p':
       self._document['content'].append(self._current_node)
       self._current_node = {}
     
