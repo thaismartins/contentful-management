@@ -22,5 +22,4 @@ def create_image(title, description, url):
     }
   }
 
-  new_asset = create_asset(attributes)
-  return { 'id': new_asset.id }
+  return create_asset(attributes)
