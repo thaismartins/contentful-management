@@ -1,4 +1,5 @@
 from logs.logging import logging
+from slugify import slugify
 from entry.create import create_entry
 from brand.get import get_brand_by_title
 from brand.hero.create import create_or_update_hero
@@ -55,6 +56,9 @@ def create_brand(entry, logo, hero):
     "fields": {
       "title": {
         "pt-BR": entry['title']
+      },
+      'slug': {
+        'pt-BR': slugify(entry['title'])
       },
       "description": {
         'pt-BR': entry['description']

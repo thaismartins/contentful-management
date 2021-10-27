@@ -2,6 +2,7 @@ from model.image.create import create_or_update_image
 from model.hero.create import create_or_update_hero
 from entry.create import create_entry
 from logs.logging import logging
+from slugify import slugify
 from model.get import get_model_by_title
 
 def create_or_update_model(entry, brand):
@@ -33,6 +34,9 @@ def create_model(entry, hero, image, brand):
     "fields": {
       "title": {
         "pt-BR": entry['title']
+      },
+      'slug': {
+        'pt-BR': slugify(entry['title'])
       },
       "brand": generate_entry(brand['id']),
       "description": {
