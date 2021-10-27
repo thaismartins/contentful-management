@@ -1,17 +1,15 @@
 from pathlib import Path
-import requests
-import mimetypes
 
-def get_content_type(url):
-  response = requests.get(url)
-  return response.headers['content-type']
-
-def get_extension(content_type):
-  return mimetypes.guess_extension(content_type)
+def get_content_type(extension):
+  if extension == '.jpg' or extension == '.jpeg':
+    return 'image/jpg'
+  
+  if extension == '.png':
+    return 'image/png'
 
 def get_file_details(url):
-  content_type = get_content_type(url)
-  extension = get_extension(content_type)
+  extension = Path(url).suffix
+  content_type = get_content_type(extension)
   filename = Path(url).stem
 
   return {
