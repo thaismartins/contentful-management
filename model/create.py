@@ -1,6 +1,53 @@
+from model.image.create import create_or_update_image
+from model.hero.create import create_or_update_hero
 from entry.create import create_entry
+from logs.logging import logging
+from model.get import get_model_by_title
 
-def generate_hero(id):
+def create_or_update_model(entry, brand):
+  logging('-----')
+  logging('-----')
+  logging('-----')
+  logging('Starting Model creation...')
+
+  if entry is None:
+    logging('Model wasn`t created. No data was passed...')
+    return None
+
+  model = get_model_by_title(entry['title'])
+  hero = create_or_update_hero(entry['hero'])
+  image = create_or_update_image(entry)
+
+  if(model):
+    return update_model(model, hero, image, brand)
+
+  return create_model(entry, hero, image, brand)
+
+def update_model(model, hero, image, brand):
+  #TODO: update model
+  return model
+
+def create_model(entry, hero, image, brand):
+  attributes = {
+    'content_type_id': 'model',
+    "fields": {
+      "title": {
+        "pt-BR": entry['title']
+      },
+      "brand": generate_entry(brand['id']),
+      "description": {
+        "pt-BR": entry['description']
+      },
+      "image": generate_image(image['id']),
+      "hero": generate_entry(hero['id']),
+    }
+  }
+
+  new_model = create_entry(attributes)
+
+  return { 'id': new_model.id }
+
+def generate_entry(id):
   return {
     "pt-BR": {
       "sys": {
@@ -21,20 +68,3 @@ def generate_image(id):
       }
     }
   }
-
-def create_brand(hero_id, image_id):
-  attributes = {
-    'content_type_id': 'model',
-    "fields": {
-      "title": {
-        "pt-BR": "Model Name"
-      },
-      "description": {
-        "pt-BR": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et urna neque. Ut molestie velit id congue sollicitudin. Nam est metus, convallis at posuere finibus, scelerisque sed lorem. Fusce aliquet velit eget risus tristique volutpat. Vestibulum tincidunt vestibulum ornare. Praesent libero odio, volutpat sed felis at, posuere sodales ante. Ut porttitor odio massa, quis euismod mi pellentesque at. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. "
-      },
-      "logo": generate_image(image_id),
-      "hero": generate_hero(hero_id)
-    }
-  }
-
-  return create_entry(attributes)
