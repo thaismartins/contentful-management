@@ -4,17 +4,18 @@ import csv
 # logging.basicConfig(level=logging.DEBUG)
 
 from brand.create import create_or_update_brand
+from model.create import create_or_update_model
 
 def create_contents():
   with open('/Users/thaismartins/Desktop/carros.csv', 'r') as csvfile:
     reader = csv.DictReader(csvfile)
     
     for row in reader:
-
       brand = generate_brand(row)
       new_brand = create_or_update_brand(brand)
 
-      # model = generate_model(row)
+      model = generate_model(row)
+      new_model = create_or_update_model(model, new_brand)
       # year = generate_year(row)
 
 def generate_brand(data):
@@ -33,6 +34,7 @@ def generate_model(data):
   return {
     'title': data['model'],
     'description': data['model_description'],
+    'image': data['model_image'],
     'hero': {
       'title': data['model_hero_title'],
       'description': data['model_hero_description'],
