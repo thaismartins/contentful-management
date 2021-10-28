@@ -37,7 +37,7 @@ def create_year(entry, model, hero, image):
         "pt-BR": entry['title']
       },
       'slug': {
-        'pt-BR': slugify(entry['title'])
+        'pt-BR': slugify(entry['title'], lowercase=True)
       },
       "model": generate_entry(model['id']),
       "description": {
