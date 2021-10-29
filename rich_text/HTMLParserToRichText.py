@@ -9,9 +9,10 @@ class HTMLParserToRichText(HTMLParser):
   _current_node = None
   _current_tag = None
 
-  def __init__(self, *, convert_charrefs: bool = ...) -> None:
+  def __init__(self, *, clear, convert_charrefs: bool = ...) -> None:
     super().__init__(convert_charrefs=convert_charrefs)
-    self.clear_contents()
+    if clear:
+      self.clear_contents()
 
   def clear_contents(self):
     self._document = {
@@ -49,7 +50,7 @@ class HTMLParserToRichText(HTMLParser):
 
   def handle_endtag(self, tag):
     self._current_tag = None
-    if self._document['content'] and tag == 'p':
+    if self._document and tag == 'p':
       self._document['content'].append(self._current_node)
       self._current_node = {}
     
@@ -61,8 +62,6 @@ class HTMLParserToRichText(HTMLParser):
       self._current_node['content'].append(self.add_text(data, 'bold'))
     elif (self._current_tag == 'i'):
       self._current_node['content'].append(self.add_text(data, 'italic'))
-    else:
-      self._current_node['content'].append(self.add_text(data))
 
   def get_document(self):
     return self._document
