@@ -58,7 +58,7 @@ def create_brand(entry, logo, hero):
         "pt-BR": entry['title']
       },
       'slug': {
-        'pt-BR': slugify(entry['title'], lowercase=True)
+        'pt-BR': slugify(entry['title'].lower())
       },
       "description": {
         'pt-BR': entry['description']

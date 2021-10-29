@@ -36,7 +36,7 @@ def create_model(entry, hero, image, brand):
         "pt-BR": entry['title']
       },
       'slug': {
-        'pt-BR': slugify(entry['title'], lowercase=True)
+        'pt-BR': slugify(entry['title'].lower())
       },
       "brand": generate_entry(brand['id']),
       "description": {
