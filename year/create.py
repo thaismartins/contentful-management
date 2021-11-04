@@ -15,7 +15,7 @@ def create_or_update_year(entry, model):
     logging('Year wasn`t created. No data was passed...')
     return None
   
-  year = get_year_by_title(entry['title'])
+  year = get_year_by_title(entry['title'], model)
   hero = create_or_update_hero(entry['hero'])
   image = create_or_update_image(entry)
 

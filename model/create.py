@@ -15,7 +15,7 @@ def create_or_update_model(entry, brand):
     logging('Model wasn`t created. No data was passed...')
     return None
 
-  model = get_model_by_title(entry['title'])
+  model = get_model_by_title(entry['title'], brand)
   hero = create_or_update_hero(entry['hero'])
   image = create_or_update_image(entry)
 

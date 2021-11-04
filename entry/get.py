@@ -1,7 +1,7 @@
 import os
 import contentful_management
 
-def get_entry(id=None, content_type_id=None, query=None):
+def get_entry(id=None, content_type_id=None, query=None, linked=None):
   token = os.environ.get('CONTENTFUL_MANAGEMENT_TOKEN')
   space = os.environ.get('CONTENTFUL_SPACE')
   environment = os.environ.get('CONTENTFUL_ENVIRONMENT')
@@ -18,8 +18,20 @@ def get_entry(id=None, content_type_id=None, query=None):
   
   foundedEntry = {}
   for entry in entries:
-    if (query['field'] in entry.raw['fields'] and entry.raw['fields'][query['field']]['pt-BR'] == query['value']):
+    if hasValue(query, entry.raw['fields']) and hasRelation(linked, entry.raw['fields']):
       entry.raw['fields']['id'] = entry.raw['sys']['id']
       foundedEntry = entry.raw['fields']
 
   return foundedEntry
+
+def hasValue(query, fields):
+  if query is None:
+    return True
+
+  return query['field'] in fields and fields[query['field']]['pt-BR'] == query['value']
+
+def hasRelation(linked, fields):
+  if linked is None:
+    return True
+
+  return linked['field'] in fields and fields[linked['field']]['pt-BR']['sys']['id'] == linked['value']
